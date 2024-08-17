@@ -1,0 +1,90 @@
+,description,query
+0,List all films in the database.,SELECT * FROM films;
+1,Retrieve the details of a specific film by its ID.,SELECT * FROM films WHERE id = 1;
+2,Retrieve the details of films released in a specific year.,SELECT * FROM films WHERE release_year = 2022;
+3,Retrieve the details of films with a rating higher than a certain value.,SELECT * FROM films WHERE rating > 4.0;
+4,Retrieve the details of films with a review containing specific keywords.,SELECT * FROM films WHERE review LIKE '%great%';
+5,Retrieve the details of films watched at a specific time.,SELECT * FROM films WHERE watched_time = '2022-01-01';
+6,Retrieve the number of films in the database.,SELECT COUNT(*) FROM films;
+7,Retrieve the average rating of all films in the database.,SELECT AVG(rating) FROM films;
+8,Retrieve the details of the top 10 highest-rated films.,SELECT * FROM films ORDER BY rating DESC LIMIT 10;
+9,Retrieve the details of films released after a certain year.,SELECT * FROM films WHERE release_year > 2020;
+10,Retrieve the details of films with a rating within a specific range.,SELECT * FROM films WHERE rating BETWEEN 3.0 AND 4.5;
+11,Retrieve the details of films with a specific name.,SELECT * FROM films WHERE film_name = 'The Matrix';
+12,Retrieve the highest rating among all films.,SELECT MAX(rating) FROM films;
+13,Retrieve the lowest release year among all films.,SELECT MIN(release_year) FROM films;
+14,Retrieve the total count of films watched.,SELECT COUNT(*) FROM films WHERE watched_time IS NOT NULL;
+15,Calculate the average rating of films released after 2000.,SELECT AVG(rating) FROM films WHERE release_year > 2000;
+16,Count the number of films released each year.,"SELECT release_year, COUNT(*) FROM films GROUP BY release_year;"
+17,Calculate the total sum of ratings for all films.,SELECT SUM(rating) FROM films;
+18,Find the average rating of films watched in 2022.,"SELECT AVG(rating) FROM films WHERE strftime('%Y', watched_time) = '2022';"
+19,Retrieve the number of films with a review containing more than 100 characters.,SELECT COUNT(*) FROM films WHERE LENGTH(review) > 100;
+20,Calculate the total count of films watched per month.,"SELECT strftime('%m', watched_time) AS month, COUNT(*) FROM films WHERE watched_time IS NOT NULL GROUP BY month;"
+21,Retrieve the release year with the highest number of films.,"SELECT release_year, COUNT(*) FROM films GROUP BY release_year ORDER BY COUNT(*) DESC LIMIT 1;"
+22,Calculate the average rating of films released in each year.,"SELECT release_year, AVG(rating) FROM films GROUP BY release_year;"
+23,Find the year with the highest average rating.,"SELECT release_year, AVG(rating) FROM films GROUP BY release_year ORDER BY AVG(rating) DESC LIMIT 1;"
+24,Retrieve the number of films released in the last decade.,SELECT COUNT(*) FROM films WHERE release_year BETWEEN 2014 AND 2024;
+25,Calculate the total count of films with non-null ratings.,SELECT COUNT(*) FROM films WHERE rating IS NOT NULL;
+26,Retrieve the details of films with a rating higher than the average rating of all films.,SELECT * FROM films WHERE rating > (SELECT AVG(rating) FROM films);
+27,Retrieve the details of films released after the year of the film with the highest rating.,SELECT * FROM films WHERE release_year > (SELECT release_year FROM films ORDER BY rating DESC LIMIT 1);
+28,Retrieve the details of films with a rating higher than the average rating of films released in 2022.,SELECT * FROM films WHERE rating > (SELECT AVG(rating) FROM films WHERE release_year = 2022);
+29,Retrieve the details of films with a rating higher than the lowest rating of films released in 2022.,SELECT * FROM films WHERE rating > (SELECT MIN(rating) FROM films WHERE release_year = 2022);
+31,Retrieve the details of films with a rating higher than the average rating of films released in the same year as 'The Matrix'.,SELECT * FROM films WHERE rating > (SELECT AVG(rating) FROM films WHERE release_year = (SELECT release_year FROM films WHERE film_name = 'The Matrix'));
+32,"Retrieve the details of films with a rating higher than the average rating of films watched on January 1, 2022.","SELECT * FROM films WHERE rating > (SELECT AVG(rating) FROM films WHERE strftime('%Y-%m-%d', watched_time) = '2022-01-01');"
+33,Retrieve the details of films released in the same year as the film with the lowest rating.,SELECT * FROM films WHERE release_year = (SELECT release_year FROM films WHERE rating = (SELECT MIN(rating) FROM films));
+34,Retrieve the details of films with a rating higher than the average rating of films released after 2000.,SELECT * FROM films WHERE rating > (SELECT AVG(rating) FROM films WHERE release_year > 2000);
+35,Retrieve the details of films with a rating higher than the average rating of films released before 2000.,SELECT * FROM films WHERE rating > (SELECT AVG(rating) FROM films WHERE release_year < 2000);
+36,Retrieve the details of films with release years formatted as 'YYYY-MM-DD'.,"SELECT film_name, strftime('%Y-%m-%d', release_year) AS formatted_release_year FROM films;"
+37,Retrieve the details of films with their names converted to uppercase.,SELECT UPPER(film_name) FROM films;
+38,Retrieve the details of films with their release years shifted by 5 years into the future.,"SELECT film_name, release_year + 5 AS future_release_year FROM films;"
+39,Retrieve the details of films with their ratings rounded to the nearest integer.,SELECT ROUND(rating) FROM films;
+40,Retrieve the details of films with their review lengths calculated.,"SELECT film_name, LENGTH(review) AS review_length FROM films;"
+41,Retrieve the details of films with their review contents replaced with 'No review available' if the review is null.,"SELECT film_name, COALESCE(review, 'No review available') AS review_content FROM films;"
+42,Retrieve the details of films with their ratings multiplied by 2.,"SELECT film_name, rating * 2 AS multiplied_rating FROM films;"
+43,Retrieve the details of films with their release years truncated to the nearest decade.,"SELECT film_name, CAST(release_year / 10 * 10 AS INTEGER) AS truncated_release_year FROM films;"
+44,Retrieve the details of films with their ratings ranked in descending order.,"SELECT film_name, rating, RANK() OVER (ORDER BY rating DESC) AS rating_rank FROM films;"
+45,Retrieve the details of films with their release years converted to Julian day numbers.,"SELECT film_name, julianday(release_year) AS julian_release_year FROM films;"
+46,List films with release years formatted as 'YYYY-MM-DD'.,"SELECT film_name, strftime('%Y-%m-%d', release_year) AS formatted_release_year FROM films;"
+47,Fetch films with their names converted to uppercase.,SELECT UPPER(film_name) FROM films;
+48,Retrieve films with release years shifted by 5 years into the future.,"SELECT film_name, release_year + 5 AS future_release_year FROM films;"
+49,Show films with ratings rounded to the nearest integer.,SELECT ROUND(rating) FROM films;
+50,Display films with their review lengths calculated.,"SELECT film_name, LENGTH(review) AS review_length FROM films;"
+51,Bring films with review contents replaced with 'No review available' if the review is null.,"SELECT film_name, COALESCE(review, 'No review available') AS review_content FROM films;"
+52,List films with ratings multiplied by 2.,"SELECT film_name, rating * 2 AS multiplied_rating FROM films;"
+53,Fetch films with release years truncated to the nearest decade.,"SELECT film_name, CAST(release_year / 10 * 10 AS INTEGER) AS truncated_release_year FROM films;"
+54,Show films with ratings ranked in descending order.,"SELECT film_name, rating, RANK() OVER (ORDER BY rating DESC) AS rating_rank FROM films;"
+55,Display films with release years converted to Julian day numbers.,"SELECT film_name, julianday(release_year) AS julian_release_year FROM films;"
+56,Find films with the longest review length.,SELECT * FROM films WHERE LENGTH(review) = (SELECT MAX(LENGTH(review)) FROM films);
+57,Retrieve films with release years between the earliest and latest years in the database.,SELECT * FROM films WHERE release_year BETWEEN (SELECT MIN(release_year) FROM films) AND (SELECT MAX(release_year) FROM films);
+58,List films with release years matching those of the highest-rated films.,SELECT * FROM films WHERE release_year IN (SELECT release_year FROM films WHERE rating = (SELECT MAX(rating) FROM films));
+59,Show films with ratings within 1 point of the maximum rating.,SELECT * FROM films WHERE rating >= (SELECT MAX(rating) FROM films) - 1;
+60,Retrieve films with ratings at least 1 point lower than the maximum rating.,SELECT * FROM films WHERE rating < (SELECT MAX(rating) FROM films) - 1;
+61,Find films with release years matching those of the lowest-rated films.,SELECT * FROM films WHERE release_year IN (SELECT release_year FROM films WHERE rating = (SELECT MIN(rating) FROM films));
+62,Display films with release years not found in the list of distinct release years.,SELECT * FROM films WHERE release_year NOT IN (SELECT DISTINCT release_year FROM films);
+63,Fetch films with reviews containing words longer than the average word length in reviews.,"SELECT * FROM films WHERE LENGTH(SUBSTR(review, INSTR(review || ' ', ' ') + 1)) > (SELECT AVG(LENGTH(SUBSTR(review, INSTR(review || ' ', ' ') + 1))) FROM films);"
+64,List films with release years that are prime numbers.,"SELECT * FROM films WHERE release_year IN (2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97);"
+65,Retrieve films with release years that are leap years.,SELECT * FROM films WHERE release_year % 4 = 0 AND (release_year % 100 != 0 OR release_year % 400 = 0);
+66,Find films released in the same year as other films.,"SELECT f1.film_name AS film1, f2.film_name AS film2, f1.release_year FROM films f1 JOIN films f2 ON f1.release_year = f2.release_year AND f1.id != f2.id;"
+72,Retrieve films with similar ratings released in the same year.,"SELECT f1.film_name AS film1, f2.film_name AS film2, f1.release_year FROM films f1 JOIN films f2 ON f1.release_year = f2.release_year AND f1.rating = f2.rating AND f1.id != f2.id;"
+81,Find films with the rating increased by 1.,"SELECT film_name, rating + 1 AS increased_rating FROM films;"
+82,Retrieve films with a review or 'No review available' if the review is null.,"SELECT film_name, coalesce(review, 'No review available') AS review_content FROM films;"
+85,Display films with ratings formatted to two decimal places.,"SELECT film_name, format(rating, '0.00') AS formatted_rating FROM films;"
+86,Retrieve films with 'The' in the title using a wildcard search.,"SELECT * FROM films WHERE glob(film_name, '*The*');"
+87,Find films where the release year is represented in hexadecimal.,"SELECT film_name, hex(release_year) AS hex_release_year FROM films;"
+88,"Retrieve films with the rating if not null, otherwise display 'N/A'.","SELECT film_name, ifnull(rating, 'N/A') AS rating FROM films;"
+89,Identify films with a rating greater than 4 as 'High' or 'Low'.,"SELECT film_name, iif(rating > 4, 'High', 'Low') AS rating_classification FROM films;"
+90,Find films with 'Matrix' in the title using a substring search.,"SELECT * FROM films WHERE instr(film_name, 'Matrix') > 0;"
+91,Retrieve the last inserted row ID.,SELECT last_insert_rowid() AS last_row_id;
+92,List films with the length of the review.,"SELECT film_name, length(review) AS review_length FROM films;"
+93,Fetch films with titles starting with 'The'.,SELECT * FROM films WHERE film_name like 'The%';
+94,Display films with ratings rounded to two decimal places if they exceed 3.,"SELECT film_name, round(ifnull(rating, 0), 2) AS formatted_rating FROM films WHERE rating > 3;"
+95,Retrieve films with leading whitespaces removed from the title.,SELECT ltrim(film_name) AS trimmed_title FROM films;
+96,"Retrieve films with the review if available, otherwise display 'No review available'.","SELECT film_name, COALESCE(review, 'No review available') AS review_content FROM films;"
+98,"Display films with the release year if available, otherwise show 'N/A'.","SELECT film_name, COALESCE(release_year, 'N/A') AS release_year FROM films;"
+99,List films with either the rating or 'Not rated' if the rating is null.,"SELECT film_name, COALESCE(rating, 'Not rated') AS film_rating FROM films;"
+109,Convert hexadecimal string '4D61726B' to its binary value.,SELECT unhex('4D61726B');
+110,Convert hexadecimal string '4D61726B' to its binary value and specify the output length as 4.,"SELECT unhex('4D61726B', 4);"
+111,Get the Unicode code point of the first character in the film_name column.,SELECT unicode(film_name) FROM films;
+112,Estimate the likelihood of a condition being false.,SELECT unlikely(rating < 3) FROM films;
+113,Convert the film_name column to uppercase.,SELECT upper(film_name) FROM films;
+114,Generate a zero-filled blob of length 100.,SELECT zeroblob(100);
